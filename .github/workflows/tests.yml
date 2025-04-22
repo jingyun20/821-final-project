@@ -5,8 +5,9 @@ on:
 
 jobs:
   tests:
-    name: tests
+    name: Run Tests and Coverage
     runs-on: ubuntu-latest
+
     steps:
     - name: Check out the repository
       uses: actions/checkout@v3
@@ -18,10 +19,12 @@ jobs:
 
     - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        pip install coverage pytest
 
-    - name: Run pytest
+    - name: Run pytest with coverage
       continue-on-error: true
       run: |
         if [ -d tests/ ]; then
@@ -36,7 +39,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Check coverage
+    - name: Check coverage and comment on PR
       run: |
         if [ -f .coverage ]; then
           git fetch -q origin ${{ github.event.pull_request.head.ref }} --depth $(( ${{ github.event.pull_request.commits }} + 1 ))
@@ -80,8 +83,8 @@ jobs:
             --method POST \
             -H "Accept: application/vnd.github+json" \
             /repos/${{ github.repository }}/issues/${{ github.event.number }}/comments \
-            -f body="$REPORT" \
-            > comment_response.json
+            -f body="$REPORT" > comment_response.json
+
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
@@ -89,8 +92,8 @@ jobs:
             -f state="$status" \
             -f context='tests / coverage (pull_request)' \
             -f description="$message" \
-            -f target_url=$(jq -r ".html_url" comment_response.json)
-            &> /dev/null
+            -f target_url=$(jq -r ".html_url" comment_response.json) &> /dev/null
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

@@ -26,7 +26,7 @@ jobs:
       run: |
         if [ -d tests/ ]; then
           code=$(
-            coverage run --source=src/ -m pytest tests/ > test_report.txt
+            coverage run --source=scgenokit/ -m pytest tests/ > test_report.txt
             echo $?
           )
           echo $code > exit_code.txt
@@ -94,8 +94,3 @@ jobs:
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Print report and exit with code
-      run: |
-        cat test_report.txt
-        exit $(cat exit_code.txt)

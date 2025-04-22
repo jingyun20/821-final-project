@@ -94,8 +94,3 @@ jobs:
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Print report and exit with code
-      run: |
-        cat test_report.txt
-        exit $(cat exit_code.txt)

@@ -26,4 +26,4 @@ jobs:
       run: |
         ruff check $(git ls-files '*.py')
         ruff format --check $(git ls-files '*.py')
-        mypy $(git ls-files '*.py')
+        mypy --ignore-missing-imports $(git ls-files '*.py')

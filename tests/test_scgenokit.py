@@ -23,7 +23,6 @@ def mock_adata():
 
     var = pd.DataFrame(index=var_names)
     var.index.values[:5] = [f"MT-Gene{i}" for i in range(5)]
-
     adata = AnnData(X=X, var=var, obs=pd.DataFrame(index=obs_names))
     return adata
 
@@ -44,7 +43,7 @@ def test_normalize_log(mock_adata):
 def test_run_pca(mock_adata):
     """Test the PCA function."""
     adata = normalize_log(mock_adata.copy())
-    adata = run_pca(adata)
+    adata = run_pca(adata, n_comps=10)
     assert "X_pca" in adata.obsm
 
 

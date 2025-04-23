@@ -6,7 +6,7 @@ import gseapy as gp
 def qc_filtering(adata, min_genes=200, max_genes=2500, max_mt=5.0):
     """Filter cells based on gene count and mitochondrial gene percentage."""
     adata.var["mt"] = adata.var_names.str.startswith("MT-")
-    sc.pp.calculate_qc_metrics(adata, qc_vars=["mt"], inplace=True)
+    sc.pp.calculate_qc_metrics(adata, qc_vars=["mt"], inplace=True, percent_top=[])
 
     adata = adata[adata.obs["n_genes_by_counts"] > min_genes, :]
     adata = adata[adata.obs["n_genes_by_counts"] < max_genes, :]
@@ -25,15 +25,21 @@ def normalize_log(adata):
 
 # ---------- Dimensionality Reduction ----------
 def run_pca(adata, n_comps=50):
-    """Run PCA on the dataset."""
-    sc.pp.pca(adata, n_comps=n_comps)
+    """Run PCA on the normalized data."""
+    max_comps = min(n_comps, adata.shape[0], adata.shape[1])
+
+    # arpack solver (default in scanpy) fails when n_components == min(n_samples, n_features)
+    if max_comps == min(adata.shape[0], adata.shape[1]):
+        max_comps -= 1
+
+    sc.pp.pca(adata, n_comps=max_comps)
     return adata
 
 
-def run_umap(adata, n_neighbors=15, min_dist=0.1):
+def run_umap(adata):
     """Run UMAP on the PCA-reduced data."""
-    sc.pp.neighbors(adata)
-    sc.tl.umap(adata, n_neighbors=n_neighbors, min_dist=min_dist)
+    sc.pp.neighbors(adata, n_neighbors=15)
+    sc.tl.umap(adata, min_dist=0.1)
     return adata
 
 

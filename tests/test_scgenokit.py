@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from anndata import AnnData
 
-from scgenokit import (
+from scgenokit.scgenokit import (
     qc_filtering,
     normalize_log,
     run_pca,

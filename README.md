@@ -31,11 +31,10 @@ Here is a quick example:
 from scgenokit.qc import filter_cells
 from scgenokit.plot import plot_umap
 
-# Example: filter cells with low gene counts
-filtered_data = filter_cells(raw_data)
-
-# Plot UMAP
-plot_umap(filtered_data)
+adata = qc.load_and_filter("example_data.h5ad")
+adata = clustering.run_leiden(adata)
+qc.plot_qc_metrics(adata)
+reduce_dim.plot_umap(adata)
 ```
 
 ## 🛠️ Features

@@ -40,11 +40,11 @@ plot_umap(filtered_data)
 
 ## 🛠️ Features
 
-📦 Modular functions for each analysis step
-📈 Built-in visualizations (e.g., UMAP, PCA)
-🔎 Differential expression and enrichment tools
-🔄 Compatible with AnnData and Scanpy workflows
-🧪 Automated tests and high code quality
+### 📦 Modular functions for each analysis step
+### 📈 Built-in visualizations (e.g., UMAP, PCA)
+### 🔎 Differential expression and enrichment tools
+### 🔄 Compatible with AnnData and Scanpy workflows
+### 🧪 Automated tests and high code quality
 
 
 ## 🧪 Testing

@@ -2,3 +2,7 @@ pytest
 coverage
 scanpy
 gseapy
+anndata
+numpy
+igraph
+leidenalg

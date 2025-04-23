@@ -4,3 +4,5 @@ scanpy
 gseapy
 anndata
 numpy
+igraph
+leidenalg

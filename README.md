@@ -28,8 +28,7 @@ pip install -e .
 ## 🚀 Usage
 Here is a quick example:
 ```
-from scgenokit.qc import filter_cells
-from scgenokit.plot import plot_umap
+from scgenokit import qc, clustering, reduce_dim
 
 adata = qc.load_and_filter("example_data.h5ad")
 adata = clustering.run_leiden(adata)

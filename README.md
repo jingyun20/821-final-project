@@ -40,11 +40,11 @@ plot_umap(filtered_data)
 
 ## 🛠️ Features
 
-### 📦 Modular functions for each analysis step
-### 📈 Built-in visualizations (e.g., UMAP, PCA)
-### 🔎 Differential expression and enrichment tools
-### 🔄 Compatible with AnnData and Scanpy workflows
-### 🧪 Automated tests and high code quality
+- 📦 Modular functions for each analysis step
+- 📈 Built-in visualizations (e.g., UMAP, PCA)
+- 🔎 Differential expression and enrichment tools
+- 🔄 Compatible with AnnData and Scanpy workflows
+- 🧪 Automated tests and high code quality
 
 
 ## 🧪 Testing
@@ -57,10 +57,10 @@ pytest
 
 This project is developed by **Yuejun Xu** and **Jingyun Liu** as part of a software tools for data science (BIOSTAT 821) course, with a focus on:
 
-📁 Modular code design
-🔄 Version control with Git
-✅ Automated testing with pytest
-📚 Clear documentation and reproducibility
+- Modular code design
+- Version control with Git
+- Automated testing with pytest
+- Clear documentation and reproducibility
 
 ## 🙌 Acknowledgments
 
